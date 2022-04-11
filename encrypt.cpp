@@ -1,11 +1,7 @@
 #include <iostream>
-#include <thread>
-#include <chrono>
-#include <cmath>
 using namespace std;
 
 void cipher_algoritham(int matrix_key[3][3], int matrix_message[3][1], int matrix_cipher[3][1], string key, string message);
-void show_progress_bar(int time, const std::string &message, char symbol);
 
 int main()
 {
@@ -15,51 +11,25 @@ int main()
     int matrix_key[3][3], matrix_message[3][1], matrix_cipher[3][1];
 
     system("clear");
-    show_progress_bar(100, "Loading Hill-Cipher ...", '#');
-    system("clear");
-    cout << "\033[1;31m"
-         << "["
-         << "\033[1;37m"
-         << " v 1.0.0"
-         << "\033[1;31m"
-         << " ]"
-         << "\033[1;31m"
-         << "\t\t["
-         << "\033[1;37m"
-         << " by Hosam Alhamawi"
-         << "\033[1;31m"
-         << " ]"
-         << "\033[1;31m"
-         << "\t\t[ "
-         << "\033[1;37m"
-         << "https://github.com/hosamalhamwi"
-         << "\033[1;31m"
-         << " ]\n\n";
-    cout << "\033[1;31m"
-         << "--------------------------------------------------------------------------------------------------\n\n";
-    cout << "\033[1;31m"
-         << "Hill Cipher:\n\n";
 
     do
     {
 
-        cout << "Please enter the message :"
-             << "\033[1;37m" << endl;
+        cout << "Please enter the message :" << endl;
         cin >> message;
 
         if (message.length() < 15)
         {
             system("clear");
-            cout << "\033[1;31m"
-                 << "The message must be 15 characters long" << endl;
+            cout << "The message must be 15 characters long" << endl;
             validate = true;
         }
         else
         {
             system("clear");
-            cout << "\033[1;31m"
-                 << "Please enter the key :"
-                 << "\033[1;37m" << endl;
+
+            cout << "Please enter the key :" << endl;
+
             cin >> key;
             validate = false;
         }
@@ -102,23 +72,4 @@ void cipher_algoritham(int matrix_key[3][3], int matrix_message[3][1], int matri
     {
         cout << char(matrix_cipher[i][0] + 65);
     }
-}
-
-void show_progress_bar(int time, const std::string &message, char symbol)
-{
-    std::string progress_bar;
-    const double progress_level = 1.42;
-
-    std::cout << "\n\033[1;31m" << message << "\n\n";
-
-    for (double percentage = 0; percentage <= 100; percentage += progress_level)
-    {
-        progress_bar.insert(0, 1, symbol);
-        std::cout << "\033[1;31m"
-                  << "\r [ "
-                  << "\033[1;37m" << std::ceil(percentage) << '%' << "\033[1;31m"
-                  << " ] " << progress_bar;
-        std::this_thread::sleep_for(std::chrono::milliseconds(time));
-    }
-    std::cout << "\n\n";
 }
